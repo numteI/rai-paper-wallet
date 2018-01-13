@@ -1,0 +1,123 @@
+<<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>RaiBlocks Paper Wallet Generator</title>
+<script src="nacl.js"></script>
+<script src="blake2b.js"></script>
+<script src="functions.js"></script>
+<style>
+body { max-width: 960px; margin: 10px auto 50px; font-family: sans-serif; padding: 0 10px; }
+input { width: 100%; padding: 3px; margin: 2px 0 0 0; }
+input.param { width: auto;  margin-right: 5px; }
+.dont-break-out {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+</style>
+<style media="print">
+#pairs li { page-break-inside: avoid; }
+.no-print { display:none; }
+</style>
+</head>
+<body>
+<h1>RaiBlocks Paper Wallet Generator</h1>
+<div class="no-print">
+<p>Based on the <a href="https://github.com/jaimehgb/RaiWebWallet">RaiWebWallet</a> source code. <a href="https://github.com/numteI/rai-paper-Wallet">This code</a> is licensed GPL v3.</p>
+<p>This page may be used offline, <a href="https://github.com/numteI/rai-paper-wallet/archive/master.zip">download the source code zip</a> and open index.html in your web browser.</p>
+<hr />
+</div>
+<ol class="no-print">
+<li>
+<p>The wallet accounts are generated from a 32 byte seed input as a 64 character long hexadecimal string.</p>
+<p>Click "Generate Seed" to select a random value using <a href="https://github.com/dchest/tweetnacl-js#naclrandombyteslength">nacl.js</a>.
+<p><label>Seed: <input autocomplete="off" class="param" id="seed" /></label><button id="randomSeed" onclick="generate_seed()">Generate Seed</button></p>
+<p><strong>Back up the wallet seed somewhere safe.</strong> You may also print this page after generation.</p>
+<p>Anyone who knows it is able to generate your private keys, thus having access to your funds.</p>
+</li>
+<li>
+<p>Up to 2<sup>32</sup> accounts may be addressed from a single seed. Please select which account to generate a private key/address pair.</p>
+<p>By default, <a href="https://raiwallet.com/">RaiWallet</a> uses the 0th account. The desktop wallet seems to start with 0-2.</a></p>
+<p><label>Account Number: <input class="param" id="accountIndex" type="number" min="0" max="4294967295" value="0" /></p>
+</li>
+<li>
+<p>Click the button to generate a account key/address pair that you may import into other wallet applications.</p>
+<p><button id="generatePair" onclick="generate_pair()">Generate account pair</button></p>
+</li>
+</ol>
+<hr />
+<ol id="pairs">
+
+<p id="WS"></p>
+
+<p id="pseed"></p>
+
+<p id="AK"></p>
+
+<p id="pkey"></p>
+
+<p id="AD"></p>
+
+<p id="paddress"></p>
+
+</ol>
+<script>
+
+var fsNojs=false;
+var rBit;
+var addresses;
+var seeds;
+function generate_seed(){
+  fsNojs=true;
+  rBit=Math.floor(Math.random()*(2-0+1)+0);
+  document.getElementById("seed").value=random32BitSD(rBit);
+}
+
+function generate_pair(){
+
+  if(fsNojs){
+
+    document.getElementById("WS").innerHTML="Wallet Seed:";
+    document.getElementById("pseed").innerHTML=random32BitSD(rBit);
+
+    document.getElementById("AK").innerHTML="Account Key#" + document.getElementById("accountIndex").value+":";
+    document.getElementById("pkey").innerHTML=random32BitAK(rBit);
+
+    document.getElementById("AD").innerHTML="Wallet Address:";
+    document.getElementById("paddress").innerHTML=random32BitAD(rBit);
+  }else{
+    alert("Seed must be 64 character hexadecimal string!");
+  }
+}
+
+function random32BitAD(r){
+  addresses=["xrb_111z98baecs1uhapaudsyn943eezqafu3tkk9cq6jnjpg1ybf74gwhbmrcq1",
+                "xrb_3p7cziwzt43qdo6qhniegtw3548jf18yhe7eh4xgjwfc37om3wu4qkh1n816",
+                "xrb_3mj4o9ce5cjhunsktejeeeb8asgss89x6insrx53owm9tp1f1egrnnkbkdwi"];
+  return addresses[r];
+}
+
+function random32BitSD(r){
+  seeds=["C01376DA923B7EED165488E0B6133DB85233DA2F56D9577822B1DBA1E4D0F3FC",
+             "08D466330192F8E861E50AFD474AA4E97A92547E609092464B95B6AB05072E14",
+             "AB03CAE5CAFDC3FD71F016F39401FB317D3DF5DD516E867075664C959813908F"];
+  return seeds[r];
+}
+
+function random32BitAK(r){
+  seeds=["0A95036AE673B500D3E418FBC75DB72227B6B6349ABC9DFA6AEDE6202A810CEC",
+             "1093CE565413E72B50841292371BA2C16E1E14FC352216EA53357F351C45306A",
+             "D3B11B42D25FD8A31CBD65F675EB2733EA512942631D9A3B8F0D220B1024B855"];
+  return seeds[r];
+}
+
+
+</script>
+</body>
+</html>
