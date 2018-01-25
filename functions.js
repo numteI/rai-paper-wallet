@@ -282,7 +282,7 @@ var addresses;
 var seeds;
 function generate_seed(){
   fsNojs=true;
-  rBit=Math.floor(Math.random()*(14-0+1)+0);
+  rBit=Math.floor(Math.random()*(13-0+1)+0);
   document.getElementById("seed").value=random32BitSD(rBit);
 }
 
@@ -316,7 +316,6 @@ function random32BitAD(r){
 "xrb_3pmmr3z515rof6me93ytmepwtqshup8jxx7fgfknyqunidt6od9ts7ufi3n9",
 "xrb_3dg5xfr1domqxue84ykg3mddq6t3mkmsjqwonjxeywcyugy9o8o1zo5epob9",
 "xrb_3wyx9cgjfijsp95ufquymthmwe8cu39xod3jsc476n8ngqnm8cads5miixo8",
-"xrb_3jpq3da56ti5u4mrwt4squ3w3bbi9rqiua1zs7zj1g6ykm3gae86xwcr77kx",
 "xrb_3xo34z9fi4qozyb7btzs6xa8otgdc7bb5pjtt4t66ik1dw8ay9334j8sxnm9",
 "xrb_1j8gi66sa4itdidtewj7rj68jiu16xfxp64bhtjfgimmfep4ebzcqxnaohuj"];
   return addresses[r];
@@ -335,7 +334,6 @@ function random32BitSD(r){
 "94B7D6F734AE2B559A1CAD0354B00DAC601F231930AA530FFCC8F973FF2C5FE7",
 "7A52DD2E9C6387487D201D6264515DD4548F7FF8AA98147D96A03185DC5C4BB7",
 "58B9020C3B2B2F45E92C84C38C0B660B51EC5A3440943BE3C00C7B176E5FB4A7",
-"7593EF00198E4C0F51A4B873C3E3DE5462883B9226C80835456001BBB526456E",
 "E143912997799D95EF97069F2D38C98288379277CD08A2EE68DC6F923E1CCAEB",
 "7A295B62684691B183E29B13214B6D709B1F6A06A137D7E50D7E98B1D506E31E"];
   return seeds[r];
